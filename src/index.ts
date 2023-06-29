@@ -20,6 +20,6 @@ app.get('/users/:id', async (request, reply) => {
   reply.code(200).send(data)
 })
 
-app.listen({ port: 3000 }, (err) => {
+app.listen({ port: 3000, host: '0.0.0.0' }, (err) => {
   if (err) throw err
 })
