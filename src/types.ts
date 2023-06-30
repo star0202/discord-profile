@@ -16,7 +16,7 @@ export type Lanyard = {
   success: boolean
 }
 
-type Spotify = {
+export type Spotify = {
   track_id: string
   timestamps: Timestamps
   album: string

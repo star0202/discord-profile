@@ -7,6 +7,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
+    'eslint-plugin-react',
   ],
   overrides: [],
   parser: '@typescript-eslint/parser',
@@ -14,7 +15,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'eslint-plugin-react'],
   rules: {
     'prettier/prettier': [
       'error',
