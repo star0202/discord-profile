@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  github-profile:
+  app:
     image: 'ghcr.io/star0202/discord-profile:latest'
     ports:
       - '3000:3000'
