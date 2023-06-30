@@ -39,51 +39,49 @@ export const discordCard = async (
     : 15
 
   return await generate(
-    <>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: '#5865f2',
+        borderRadius: 10,
+      }}
+    >
+      <img
+        src={data.pfp}
+        style={{
+          width: 100 - pfpMargin * 2,
+          height: 100 - pfpMargin * 2,
+          margin: pfpMargin,
+          borderRadius: 10,
+        }}
+      />
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
-          backgroundColor: '#5865f2',
-          borderRadius: 10,
+          flexDirection: 'column',
+          marginLeft: textMargin - pfpMargin,
+          marginRight: textMargin,
+          color: 'white',
         }}
       >
         <img
-          src={data.pfp}
-          style={{
-            width: 100 - pfpMargin * 2,
-            height: 100 - pfpMargin * 2,
-            margin: pfpMargin,
-            borderRadius: 10,
-          }}
+          src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0b544a3e3c7c05753bcd_full_logo_white_RGB.png"
+          style={{ height: 20, marginBottom: 5 }}
         />
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginLeft: textMargin - pfpMargin,
-            marginRight: textMargin,
-            color: 'white',
-          }}
-        >
-          <img
-            src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0b544a3e3c7c05753bcd_full_logo_white_RGB.png"
-            style={{ height: 20, marginBottom: 5 }}
-          />
-          {data.global_name}
-          <div style={{ display: 'flex', opacity: 0.6 }}>
-            {data.username} -
-            <div
-              style={{
-                color: statusMapping[data.status].color,
-                marginLeft: 4,
-              }}
-            >
-              {statusMapping[data.status].text}
-            </div>
+        {data.global_name}
+        <div style={{ display: 'flex', opacity: 0.6 }}>
+          {data.username} -
+          <div
+            style={{
+              color: statusMapping[data.status].color,
+              marginLeft: 4,
+            }}
+          >
+            {statusMapping[data.status].text}
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
