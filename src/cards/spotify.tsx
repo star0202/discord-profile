@@ -1,9 +1,7 @@
-import { Spotify } from '../types'
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import satori from 'satori'
+import { generate } from '.'
+import type { Spotify } from '../types'
 
-export const genSpotifyCard = async (
+export const spotifyCard = async (
   spotifyData: Spotify | null,
   marginQuery?: {
     albumMargin?: string
@@ -26,7 +24,7 @@ export const genSpotifyCard = async (
     ? parseInt(marginQuery.textMargin)
     : 15
 
-  return await satori(
+  return await generate(
     <>
       <div
         style={{
@@ -57,29 +55,12 @@ export const genSpotifyCard = async (
             src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png"
             style={{ height: 20, marginBottom: 5 }}
           />
-          <div style={{ display: 'flex' }}>{data.song}</div>
+          <div>{data.song}</div>
           <div style={{ display: 'flex', color: '#3d3d3d' }}>
             {data.artist} - {data.album}
           </div>
         </div>
       </div>
-    </>,
-    {
-      height: 100,
-      fonts: [
-        {
-          name: 'Pretendard-SemiBold',
-          data: readFileSync(
-            join(__dirname, '../../fonts/Pretendard-SemiBold.otf')
-          ),
-        },
-        {
-          name: 'PretendardJP-SemiBold',
-          data: readFileSync(
-            join(__dirname, '../../fonts/PretendardJP-SemiBold.otf')
-          ),
-        },
-      ],
-    }
+    </>
   )
 }

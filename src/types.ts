@@ -6,7 +6,7 @@ export type Lanyard = {
 
     activities: Activity[]
 
-    discord_status: 'idle' | 'dnd' | 'online' | 'offline'
+    discord_status: Status
     active_on_discord_web: boolean
     active_on_discord_desktop: boolean
     active_on_discord_mobile: boolean
@@ -25,7 +25,7 @@ export type Spotify = {
   song: string
 }
 
-type User = {
+export type User = {
   id: string
   username: string
   avatar: string
@@ -61,3 +61,5 @@ type Timestamps = {
   start: number
   end: number
 }
+
+export type Status = 'idle' | 'dnd' | 'online' | 'offline'

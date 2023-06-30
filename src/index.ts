@@ -1,4 +1,4 @@
-import { genSpotifyCard } from './cards'
+import { discordCard, spotifyCard } from './cards'
 import { LanyardRequest } from './http'
 import fastify from 'fastify'
 
@@ -22,7 +22,24 @@ app.get('/spotify/:id', async (request, reply) => {
   }
   const { data } = await lanyard.getUser(id)
 
-  const card = await genSpotifyCard(data.spotify, margin)
+  const card = await spotifyCard(data.spotify, margin)
+
+  reply.code(200).type('image/svg+xml').send(card)
+})
+
+app.get('/discord/:id', async (request, reply) => {
+  if (!request.params) reply.code(400).send('No User ID Provided')
+
+  const { id } = request.params as { id: string }
+  const margin = request.query as {
+    pfpMargin?: string
+    textMargin?: string
+  }
+  const {
+    data: { discord_user, discord_status },
+  } = await lanyard.getUser(id)
+
+  const card = await discordCard({ discord_user, discord_status }, margin)
 
   reply.code(200).type('image/svg+xml').send(card)
 })
