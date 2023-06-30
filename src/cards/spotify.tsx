@@ -3,7 +3,7 @@ import type { Spotify } from '../types'
 
 export const spotifyCard = async (
   spotifyData: Spotify | null,
-  marginQuery?: {
+  marginQuery: {
     albumMargin?: string
     textMargin?: string
   }
