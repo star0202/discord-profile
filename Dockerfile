@@ -2,8 +2,7 @@ FROM node:19-alpine
 
 WORKDIR /app
 
-COPY package.json .
-COPY pnpm-lock.yaml .
+COPY package.json pnpm-lock.yaml ./
 
 RUN corepack enable && pnpm i
 
