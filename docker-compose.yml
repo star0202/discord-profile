@@ -1,10 +1,7 @@
 version: '3'
 
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-
+  github-profile:
+    image: 'ghcr.io/star0202/github-profile:latest'
     ports:
       - '3000:3000'
