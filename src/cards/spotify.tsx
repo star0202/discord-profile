@@ -48,13 +48,13 @@ export const genSpotifyCard = async (spotifyData: Spotify | null) => {
         {
           name: 'Pretendard-SemiBold',
           data: readFileSync(
-            join(__dirname, '../fonts/Pretendard-SemiBold.otf')
+            join(__dirname, '../../fonts/Pretendard-SemiBold.otf')
           ),
         },
         {
           name: 'PretendardJP-SemiBold',
           data: readFileSync(
-            join(__dirname, '../fonts/PretendardJP-SemiBold.otf')
+            join(__dirname, '../../fonts/PretendardJP-SemiBold.otf')
           ),
         },
       ],
