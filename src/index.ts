@@ -18,7 +18,7 @@ app.get('/spotify/:id', async (request, reply) => {
   const { id } = request.params as { id: string }
   const { data } = await lanyard.getUser(id)
 
-  const card = await genSpotifyCard(data.spotify!)
+  const card = await genSpotifyCard(data.spotify)
 
   reply.code(200).type('image/svg+xml').send(card)
 })
