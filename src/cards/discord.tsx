@@ -2,7 +2,7 @@ import { generate } from '.'
 import type { Status, User } from '../types'
 
 const statusMapping = {
-  online: { color: '#23a55a', text: 'Online' },
+  online: { color: '#0ac459', text: 'Online' },
   idle: { color: '#f0b232', text: 'Idle' },
   dnd: { color: '#f23f43', text: 'Do Not Disturb' },
   offline: { color: '#5d5f63', text: 'Offline' },
@@ -70,7 +70,7 @@ export const discordCard = async (
           style={{ height: 20, marginBottom: 5 }}
         />
         {data.global_name}
-        <div style={{ display: 'flex', opacity: 0.6 }}>
+        <div style={{ display: 'flex', opacity: 0.8 }}>
           {data.username} -
           <div
             style={{
