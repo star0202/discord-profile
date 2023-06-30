@@ -16,9 +16,13 @@ app.get('/spotify/:id', async (request, reply) => {
   if (!request.params) reply.code(400).send('No User ID Provided')
 
   const { id } = request.params as { id: string }
+  const margin = request.query as {
+    albumMargin?: string
+    textMargin?: string
+  }
   const { data } = await lanyard.getUser(id)
 
-  const card = await genSpotifyCard(data.spotify)
+  const card = await genSpotifyCard(data.spotify, margin)
 
   reply.code(200).type('image/svg+xml').send(card)
 })

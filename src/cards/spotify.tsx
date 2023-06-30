@@ -3,7 +3,13 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import satori from 'satori'
 
-export const genSpotifyCard = async (spotifyData: Spotify | null) => {
+export const genSpotifyCard = async (
+  spotifyData: Spotify | null,
+  marginQuery?: {
+    albumMargin?: string
+    textMargin?: string
+  }
+) => {
   const data = {
     song: spotifyData?.song ?? 'Not Playing',
     artist: spotifyData?.artist ?? 'star0202/discord-profile',
@@ -12,6 +18,13 @@ export const genSpotifyCard = async (spotifyData: Spotify | null) => {
       spotifyData?.album_art_url ??
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Emoji_u1f634.svg/1200px-Emoji_u1f634.svg.png',
   }
+
+  const albumMargin = marginQuery?.albumMargin
+    ? parseInt(marginQuery.albumMargin)
+    : 10
+  const textMargin = marginQuery?.textMargin
+    ? parseInt(marginQuery.textMargin)
+    : 15
 
   return await satori(
     <>
@@ -25,16 +38,25 @@ export const genSpotifyCard = async (spotifyData: Spotify | null) => {
       >
         <img
           src={data.album_art_url}
-          style={{ width: 90, height: 90, borderRadius: 10, margin: 5 }}
+          style={{
+            width: 100 - albumMargin * 2,
+            height: 100 - albumMargin * 2,
+            margin: albumMargin,
+            borderRadius: 10,
+          }}
         />
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            marginLeft: 15,
-            marginRight: 20,
+            marginLeft: textMargin - albumMargin,
+            marginRight: textMargin,
           }}
         >
+          <img
+            src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png"
+            style={{ height: 20, marginBottom: 5 }}
+          />
           <div style={{ display: 'flex' }}>{data.song}</div>
           <div style={{ display: 'flex', color: '#3d3d3d' }}>
             {data.artist} - {data.album}
