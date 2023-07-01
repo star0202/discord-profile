@@ -16,3 +16,5 @@ Base URL: `https://discord-profile-starcea.paring.moe`
   - `albumMargin` - Margin between album and border
   - `textMargin` - Margin between text and border
 
+## Special Thanks
+[@pikokr](https://github.com/pikokr) - Hosting
