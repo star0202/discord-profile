@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { app } from '..'
 import { User } from '../types'
-import { config } from './config'
 import { Client, GatewayIntentBits } from 'discord.js'
+import { config } from 'dotenv'
+import { join } from 'path'
+
+config({ path: join(__dirname, '../../.env') })
 
 export const getUser = async (id: string) => {
-  const data = await client.guilds.cache.get(config.guild)?.members.fetch(id)
+  const data = await client.guilds.cache
+    .get(process.env.GUILD_ID!)
+    ?.members.fetch(id)
 
   if (!data || !data.presence) return null
 
@@ -51,4 +56,4 @@ client.on('ready', () => {
   app.log.info('Discord Bot Ready')
 })
 
-client.login(config.token)
+client.login(process.env.BOT_TOKEN!)
