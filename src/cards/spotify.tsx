@@ -17,10 +17,10 @@ export const spotifyCard = async (
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Emoji_u1f634.svg/1200px-Emoji_u1f634.svg.png',
   }
 
-  const albumMargin = marginQuery?.albumMargin
+  const albumMargin = marginQuery.albumMargin
     ? parseInt(marginQuery.albumMargin)
     : 10
-  const textMargin = marginQuery?.textMargin
+  const textMargin = marginQuery.textMargin
     ? parseInt(marginQuery.textMargin)
     : 15
 
