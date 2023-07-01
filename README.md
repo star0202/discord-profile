@@ -1,5 +1,5 @@
-# discord-profile
-Generates profile banner based on Discord profile
+# Discord Profile
+Generates profile card based on Discord profile
 
 ## Usage
 Join [Discord Server](https://discord.gg/aNWcKNaSVS) to track your Discord profile
