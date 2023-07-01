@@ -24,7 +24,11 @@ app.get('/spotify/:id', async (request, reply) => {
 
   const card = await spotifyCard(data.spotify, margin)
 
-  reply.code(200).type('image/svg+xml').send(card)
+  reply
+    .code(200)
+    .type('image/svg+xml')
+    .header('Cache-Control', 'public, max-age=0, must-revalidate')
+    .send(card)
 })
 
 app.get('/discord/:id', async (request, reply) => {
@@ -41,7 +45,11 @@ app.get('/discord/:id', async (request, reply) => {
 
   const card = await discordCard({ discord_user, discord_status }, margin)
 
-  reply.code(200).type('image/svg+xml').send(card)
+  reply
+    .code(200)
+    .type('image/svg+xml')
+    .header('Cache-Control', 'public, max-age=0, must-revalidate')
+    .send(card)
 })
 
 app.listen({ port: 3000, host: '0.0.0.0' }, (err) => {
