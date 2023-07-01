@@ -1,14 +1,9 @@
-export type User = {
-  discord: Discord
-  spotify: Spotify | null
-}
-
 export type Discord = {
   name: string
   username: string
   discriminator: string
   avatar: string
-  status: Status
+  status: Status | 'invisible'
 }
 
 export type Spotify = {

@@ -8,13 +8,9 @@ Base URL: `https://discord-profile-starcea.paring.moe`
 
 - `/discord/:id`
   - Show Discord profile
-  - `avatarMargin` - Margin between avatar and border
-  - `textMargin` - Margin between text and border
 
 - `/spotify/:id`
   - Show Spotify presence
-  - `albumMargin` - Margin between album and border
-  - `textMargin` - Margin between text and border
 
 ## Special Thanks
 [@pikokr](https://github.com/pikokr) - Hosting

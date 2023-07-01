@@ -1,13 +1,32 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { app } from '..'
-import { User } from '../types'
+import { Discord, Spotify } from '../types'
 import { Client, GatewayIntentBits } from 'discord.js'
 import { config } from 'dotenv'
 import { join } from 'path'
 
 config({ path: join(__dirname, '../../.env') })
 
-export const getUser = async (id: string) => {
+export const getDiscord = async (id: string): Promise<Discord | null> => {
+  const data = client.guilds.cache
+    .get(process.env.GUILD_ID!)
+    ?.members.cache.get(id)
+
+  if (!data || !data.presence) return null
+
+  return {
+    name: data.displayName,
+    username: data.user.username,
+    discriminator: data.user.discriminator,
+    avatar: data.user.displayAvatarURL({
+      extension: data.user.avatar?.startsWith('a_') ? 'gif' : 'png',
+      size: 1024,
+    }),
+    status: data.presence.status,
+  }
+}
+
+export const getSpotify = async (id: string): Promise<Spotify | null> => {
   const data = client.guilds.cache
     .get(process.env.GUILD_ID!)
     ?.members.cache.get(id)
@@ -18,30 +37,14 @@ export const getUser = async (id: string) => {
     (activity) => activity.name === 'Spotify'
   )
 
-  const user: User = {
-    discord: {
-      name: data.displayName,
-      username: data.user.username,
-      discriminator: data.user.discriminator,
-      avatar: data.user.displayAvatarURL({
-        extension: data.user.avatar?.startsWith('a_') ? 'gif' : 'png',
-        size: 1024,
-      }),
-      status:
-        data.presence.status === 'invisible' ? 'offline' : data.presence.status,
-    },
-    spotify: spotify
-      ? {
-          title: spotify.details!,
-          artist: spotify.state!,
-          album: spotify.assets!.largeText!,
-          albumArt:
-            'https://i.scdn.co/image/' + spotify.assets!.largeImage!.slice(8),
-        }
-      : null,
-  }
+  if (!spotify) return null
 
-  return user
+  return {
+    title: spotify.details!,
+    artist: spotify.state!,
+    album: spotify.assets!.largeText!,
+    albumArt: spotify.assets!.largeImage!.slice(8),
+  }
 }
 
 const client = new Client({

@@ -1,28 +1,18 @@
 import { generate } from '.'
 import type { Spotify } from '../types'
 
-export const spotifyCard = async (
-  spotifyData: Spotify | null,
-  marginQuery: {
-    albumMargin?: string
-    textMargin?: string
-  }
-) => {
+export const spotifyCard = async (spotifyData: Spotify | null) => {
   const data = {
     song: spotifyData?.title ?? 'Not Playing',
     artist: spotifyData?.artist ?? 'star0202/discord-profile',
     album: spotifyData?.album ?? 'Spotify',
-    album_art_url:
-      spotifyData?.albumArt ??
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Emoji_u1f634.svg/1200px-Emoji_u1f634.svg.png',
+    album_art_url: spotifyData?.albumArt
+      ? 'https://i.scdn.co/image/' + spotifyData?.albumArt
+      : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Emoji_u1f634.svg/1200px-Emoji_u1f634.svg.png',
   }
 
-  const albumMargin = marginQuery.albumMargin
-    ? parseInt(marginQuery.albumMargin)
-    : 10
-  const textMargin = marginQuery.textMargin
-    ? parseInt(marginQuery.textMargin)
-    : 15
+  const albumMargin = 10
+  const textMargin = 15
 
   return await generate(
     <div

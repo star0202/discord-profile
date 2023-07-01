@@ -8,29 +8,19 @@ const statusMapping = {
   offline: { color: '#5d5f63', text: 'Offline' },
 } satisfies Record<Status, { color: string; text: string }>
 
-export const discordCard = async (
-  discordData: Discord,
-  marginQuery?: {
-    pfpMargin?: string
-    textMargin?: string
-  }
-) => {
+export const discordCard = async (discordData: Discord) => {
   const data = {
     name: discordData.name,
     username:
       discordData.discriminator === '0'
         ? '@' + discordData.username
         : `${discordData.username}#${discordData.discriminator}`,
-    status: discordData.status,
+    status: discordData.status === 'invisible' ? 'offline' : discordData.status,
     pfp: discordData.avatar,
   }
 
-  const pfpMargin = marginQuery?.pfpMargin
-    ? parseInt(marginQuery.pfpMargin)
-    : 10
-  const textMargin = marginQuery?.textMargin
-    ? parseInt(marginQuery.textMargin)
-    : 15
+  const pfpMargin = 10
+  const textMargin = 15
 
   return await generate(
     <div

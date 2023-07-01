@@ -1,4 +1,5 @@
-import { getUser } from './bot'
+import { getDiscord, getSpotify } from './bot'
+import { cache, getCache, isCached } from './cache'
 import { discordCard, spotifyCard } from './cards'
 import fastify from 'fastify'
 
@@ -7,7 +8,7 @@ export const app = fastify({
     transport: {
       target: 'pino-pretty',
       options: {
-        translateTime: 'HH:MM:ss Z',
+        translateTime: 'HH:MM:ss.l mm/dd/yyyy (Z)',
         ignore: 'pid,hostname',
       },
     },
@@ -22,15 +23,17 @@ app.get('/spotify/:id', async (request, reply) => {
   if (!request.params) return reply.code(400).send('No User ID Provided')
 
   const { id } = request.params as { id: string }
-  const margin = request.query as {
-    albumMargin?: string
-    textMargin?: string
-  }
-  const data = await getUser(id)
+  const data = await getSpotify(id)
 
   if (!data) return reply.code(400).send('User Not Found')
 
-  const card = await spotifyCard(data.spotify, margin)
+  let card
+  if (await isCached(data)) {
+    card = await getCache(data)
+  } else {
+    card = await spotifyCard(data)
+    await cache(data, card)
+  }
 
   reply
     .code(200)
@@ -43,15 +46,17 @@ app.get('/discord/:id', async (request, reply) => {
   if (!request.params) return reply.code(400).send('No User ID Provided')
 
   const { id } = request.params as { id: string }
-  const margin = request.query as {
-    pfpMargin?: string
-    textMargin?: string
-  }
-  const data = await getUser(id)
+  const data = await getDiscord(id)
 
   if (!data) return reply.code(400).send('User Not Found')
 
-  const card = await discordCard(data.discord, margin)
+  let card
+  if (await isCached(data)) {
+    card = await getCache(data)
+  } else {
+    card = await discordCard(data)
+    await cache(data, card)
+  }
 
   reply
     .code(200)
