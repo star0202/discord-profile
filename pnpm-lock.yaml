@@ -12,8 +12,8 @@ dependencies:
     specifier: ^4.1.1
     version: 4.1.1
   discord.js:
-    specifier: ^14.11.0
-    version: 14.11.0
+    specifier: 14.11.1-dev.1688170357-75d91b5.0
+    version: 14.11.1-dev.1688170357-75d91b5.0
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
@@ -1082,8 +1082,8 @@ packages:
     resolution: {integrity: sha512-rNif8IAv6duS2z47BMXq/V9kkrLfkAoiwpFY3sLxxbyKprk065zqf3HLTg4bEoxRSmi+Lhc7yqGDrG8C3j8GFA==}
     dev: false
 
-  /discord.js@14.11.0:
-    resolution: {integrity: sha512-CkueWYFQ28U38YPR8HgsBR/QT35oPpMbEsTNM30Fs8loBIhnA4s70AwQEoy6JvLcpWWJO7GY0y2BUzZmuBMepQ==}
+  /discord.js@14.11.1-dev.1688170357-75d91b5.0:
+    resolution: {integrity: sha512-GjsY1jA4YYSt7FhxVtZFWgrjIhvs6JHleHR7vZfa6/WBQXUjtVS9YSq+xSH7ILWApadRZRIoPYwbFwldv5K0hw==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@discordjs/builders': 1.6.3

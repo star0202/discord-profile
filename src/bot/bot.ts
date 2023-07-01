@@ -7,6 +7,14 @@ import { join } from 'path'
 
 config({ path: join(__dirname, '../../.env') })
 
+const client = new Client({
+  intents: [
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+  ],
+})
+
 export const getDiscord = async (id: string): Promise<Discord | null> => {
   const data = client.guilds.cache
     .get(process.env.GUILD_ID!)
@@ -15,7 +23,7 @@ export const getDiscord = async (id: string): Promise<Discord | null> => {
   if (!data || !data.presence) return null
 
   return {
-    name: data.displayName,
+    name: data.user.globalName ?? data.user.username,
     username: data.user.username,
     discriminator: data.user.discriminator,
     avatar: data.user.displayAvatarURL({
@@ -44,14 +52,6 @@ export const getSpotify = async (id: string): Promise<Spotify | null> => {
     albumArt: spotify?.assets?.largeImage?.slice(8),
   }
 }
-
-const client = new Client({
-  intents: [
-    GatewayIntentBits.GuildPresences,
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
-  ],
-})
 
 client.on('ready', () => {
   app.log.info('Discord Bot Ready')
