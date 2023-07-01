@@ -2,6 +2,8 @@ import { getDiscord, getSpotify } from './bot'
 import { cache, getCache, isCached } from './cache'
 import { discordCard, spotifyCard } from './cards'
 import fastify from 'fastify'
+import { readFile } from 'fs/promises'
+import { join } from 'path'
 
 export const app = fastify({
   logger: {
@@ -17,6 +19,13 @@ export const app = fastify({
 
 app.get('/', async (_, reply) => {
   reply.redirect('https://github.com/star0202/discord-profile')
+})
+
+app.get('/favicon.ico', async (_, reply) => {
+  reply
+    .code(200)
+    .type('image/x-icon')
+    .send(await readFile(join(__dirname, '../assets/favicon.ico')))
 })
 
 app.get('/spotify/:id', async (request, reply) => {
