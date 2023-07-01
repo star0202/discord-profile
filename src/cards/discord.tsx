@@ -1,5 +1,5 @@
 import { generate } from '.'
-import type { Status, User } from '../types'
+import type { Discord, Status } from '../types'
 
 const statusMapping = {
   online: { color: '#0ac459', text: 'Online' },
@@ -9,26 +9,20 @@ const statusMapping = {
 } satisfies Record<Status, { color: string; text: string }>
 
 export const discordCard = async (
-  discordData: {
-    discord_user: User
-    discord_status: Status
-  },
+  discordData: Discord,
   marginQuery?: {
     pfpMargin?: string
     textMargin?: string
   }
 ) => {
-  const user = discordData.discord_user
   const data = {
-    global_name: user.global_name,
+    name: discordData.name,
     username:
-      user.discriminator === '0'
-        ? '@' + user.username
-        : `${user.username}#${user.discriminator}`,
-    status: discordData.discord_status,
-    pfp: user.avatar.startsWith('a_')
-      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.gif?size=1024`
-      : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=1024`,
+      discordData.discriminator === '0'
+        ? '@' + discordData.username
+        : `${discordData.username}#${discordData.discriminator}`,
+    status: discordData.status,
+    pfp: discordData.avatar,
   }
 
   const pfpMargin = marginQuery?.pfpMargin
@@ -69,7 +63,7 @@ export const discordCard = async (
           src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0b544a3e3c7c05753bcd_full_logo_white_RGB.png"
           style={{ height: 20, marginBottom: 5 }}
         />
-        {data.global_name}
+        {data.name}
         <div style={{ display: 'flex', opacity: 0.8 }}>
           {data.username} -
           <div

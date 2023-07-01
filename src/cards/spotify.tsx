@@ -9,11 +9,11 @@ export const spotifyCard = async (
   }
 ) => {
   const data = {
-    song: spotifyData?.song ?? 'Not Playing',
+    song: spotifyData?.title ?? 'Not Playing',
     artist: spotifyData?.artist ?? 'star0202/discord-profile',
     album: spotifyData?.album ?? 'Spotify',
     album_art_url:
-      spotifyData?.album_art_url ??
+      spotifyData?.albumArt ??
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Emoji_u1f634.svg/1200px-Emoji_u1f634.svg.png',
   }
 
