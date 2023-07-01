@@ -8,9 +8,9 @@ import { join } from 'path'
 config({ path: join(__dirname, '../../.env') })
 
 export const getUser = async (id: string) => {
-  const data = await client.guilds.cache
+  const data = client.guilds.cache
     .get(process.env.GUILD_ID!)
-    ?.members.fetch(id)
+    ?.members.cache.get(id)
 
   if (!data || !data.presence) return null
 
