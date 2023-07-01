@@ -1,4 +1,4 @@
-import { app } from '.'
+import { logger } from '.'
 import sha256 from 'crypto-js/sha256'
 import { appendFile, readFile } from 'fs/promises'
 import { join } from 'path'
@@ -14,7 +14,7 @@ export const isCached = async (data: object) => {
 export const cache = async (data: object, svg: string) => {
   const hash = sha256(JSON.stringify(data)).toString()
 
-  app.log.info(`Caching ${hash}`)
+  logger.info(`Caching ${hash}`)
 
   await appendFile(join(__dirname, `../cache/${hash}.svg`), svg)
 }
@@ -22,7 +22,7 @@ export const cache = async (data: object, svg: string) => {
 export const getCache = async (data: object) => {
   const hash = sha256(JSON.stringify(data)).toString()
 
-  app.log.info(`Using cache ${hash}`)
+  logger.info(`Using cache ${hash}`)
 
   return await readFile(join(__dirname, `../cache/${hash}.svg`), 'utf-8')
 }

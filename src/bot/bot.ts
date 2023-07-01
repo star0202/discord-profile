@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { app } from '..'
+import { logger } from '..'
 import { Discord, Spotify } from '../types'
 import { Client, GatewayIntentBits } from 'discord.js'
 import { config } from 'dotenv'
@@ -54,7 +54,7 @@ export const getSpotify = async (id: string): Promise<Spotify | null> => {
 }
 
 client.on('ready', () => {
-  app.log.info('Discord Bot Ready')
+  logger.info('Discord Bot Ready')
 })
 
 client.login(process.env.BOT_TOKEN!)

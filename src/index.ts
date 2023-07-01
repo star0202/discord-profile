@@ -5,7 +5,7 @@ import fastify from 'fastify'
 import { readFile } from 'fs/promises'
 import { join } from 'path'
 
-export const app = fastify({
+const app = fastify({
   logger: {
     transport: {
       target: 'pino-pretty',
@@ -16,6 +16,8 @@ export const app = fastify({
     },
   },
 })
+
+export const logger = app.log
 
 app.get('/', async (_, reply) => {
   reply.redirect('https://github.com/star0202/discord-profile')
