@@ -7,10 +7,10 @@ export type Discord = {
 }
 
 export type Spotify = {
-  title: string
-  artist: string
-  album: string
-  albumArt: string
+  title?: string | null
+  artist?: string | null
+  album?: string | null
+  albumArt?: string
 }
 
 export type Status = 'online' | 'idle' | 'dnd' | 'offline'

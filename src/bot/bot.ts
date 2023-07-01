@@ -37,13 +37,11 @@ export const getSpotify = async (id: string): Promise<Spotify | null> => {
     (activity) => activity.name === 'Spotify'
   )
 
-  if (!spotify) return null
-
   return {
-    title: spotify.details!,
-    artist: spotify.state!,
-    album: spotify.assets!.largeText!,
-    albumArt: spotify.assets!.largeImage!.slice(8),
+    title: spotify?.details,
+    artist: spotify?.state,
+    album: spotify?.assets?.largeText,
+    albumArt: spotify?.assets?.largeImage?.slice(8),
   }
 }
 
