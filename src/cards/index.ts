@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs'
+import { readFile } from 'fs/promises'
 import { join } from 'path'
 import type { ReactNode } from 'react'
 import satori from 'satori'
@@ -12,13 +12,13 @@ export const generate = async (element: ReactNode) => {
     fonts: [
       {
         name: 'Pretendard-SemiBold',
-        data: readFileSync(
+        data: await readFile(
           join(__dirname, '../../fonts/Pretendard-SemiBold.otf')
         ),
       },
       {
         name: 'PretendardJP-SemiBold',
-        data: readFileSync(
+        data: await readFile(
           join(__dirname, '../../fonts/PretendardJP-SemiBold.otf')
         ),
       },
