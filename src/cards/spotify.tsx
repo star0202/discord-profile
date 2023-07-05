@@ -1,5 +1,4 @@
 import { generate } from '.'
-import type { Spotify } from '../types'
 
 export const spotifyCard = async (spotifyData: Spotify | null) => {
   const data = {

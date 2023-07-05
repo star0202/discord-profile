@@ -1,4 +1,4 @@
-export type Discord = {
+type Discord = {
   name: string
   username: string
   discriminator: string
@@ -6,11 +6,11 @@ export type Discord = {
   status: Status | 'invisible'
 }
 
-export type Spotify = {
+type Spotify = {
   title?: string | null
   artist?: string | null
   album?: string | null
   albumArt?: string
 }
 
-export type Status = 'online' | 'idle' | 'dnd' | 'offline'
+type Status = 'online' | 'idle' | 'dnd' | 'offline'

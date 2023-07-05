@@ -1,5 +1,4 @@
 import { generate } from '.'
-import type { Discord, Status } from '../types'
 
 const statusMapping = {
   online: { color: '#0ac459', text: 'Online' },
