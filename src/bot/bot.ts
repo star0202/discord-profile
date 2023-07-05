@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { logger } from '..'
-import { Discord, Spotify } from '../types'
 import { Client, GatewayIntentBits } from 'discord.js'
 import { config } from 'dotenv'
 import { join } from 'path'
