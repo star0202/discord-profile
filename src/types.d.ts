@@ -14,3 +14,8 @@ type Spotify = {
 }
 
 type Status = 'online' | 'idle' | 'dnd' | 'offline'
+
+type Env = {
+  BOT_TOKEN: string
+  GUILD_ID: string
+}

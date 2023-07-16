@@ -5,6 +5,7 @@ import { config } from 'dotenv'
 import { join } from 'path'
 
 config({ path: join(__dirname, '../../.env') })
+const env = process.env as Env
 
 const client = new Client({
   intents: [
@@ -15,9 +16,7 @@ const client = new Client({
 })
 
 export const getDiscord = async (id: string): Promise<Discord | null> => {
-  const data = client.guilds.cache
-    .get(process.env.GUILD_ID!)
-    ?.members.cache.get(id)
+  const data = client.guilds.cache.get(env.GUILD_ID)?.members.cache.get(id)
 
   if (!data || !data.presence) return null
 
@@ -34,9 +33,7 @@ export const getDiscord = async (id: string): Promise<Discord | null> => {
 }
 
 export const getSpotify = async (id: string): Promise<Spotify | null> => {
-  const data = client.guilds.cache
-    .get(process.env.GUILD_ID!)
-    ?.members.cache.get(id)
+  const data = client.guilds.cache.get(env.GUILD_ID)?.members.cache.get(id)
 
   if (!data || !data.presence) return null
 
@@ -56,4 +53,4 @@ client.on('ready', () => {
   logger.info('Discord Bot Ready')
 })
 
-client.login(process.env.BOT_TOKEN!)
+client.login(env.BOT_TOKEN)
