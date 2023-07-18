@@ -1,6 +1,6 @@
-import { cache, getCache, isCached } from './cache'
 import { discordCard } from './cards/discord'
 import { spotifyCard } from './cards/spotify'
+import CacheManager from './structures/cache'
 import DataManager from './structures/data'
 import fastify from 'fastify'
 import { readFile } from 'fs/promises'
@@ -20,7 +20,8 @@ const app = fastify({
 
 export const logger = app.log
 
-const manager = new DataManager(logger)
+const dataManager = new DataManager(logger)
+const cacheManager = new CacheManager(logger)
 
 app.get('/', async (_, reply) => {
   reply.redirect('https://github.com/star0202/discord-profile')
@@ -41,23 +42,17 @@ app.get('/spotify/:id', async (request, reply) => {
 
   let data
   if (redirect === 'true') {
-    data = await manager.spotify(id, true)
+    data = await dataManager.spotify(id, true)
 
     if (data === undefined) return reply.code(400).send('User Not Found')
 
     reply.redirect(data ?? 'https://github.com/star0202/discord-profile')
   } else {
-    data = await manager.spotify(id, false)
+    data = await dataManager.spotify(id, false)
 
     if (data === undefined) return reply.code(400).send('User Not Found')
 
-    let card
-    if (await isCached(data)) {
-      card = await getCache(data)
-    } else {
-      card = await spotifyCard(data)
-      await cache(data, card)
-    }
+    const card = await cacheManager.generateCachedCard(data, spotifyCard)
 
     reply
       .code(200)
@@ -71,17 +66,11 @@ app.get('/discord/:id', async (request, reply) => {
   if (!request.params) return reply.code(400).send('No User ID Provided')
 
   const { id } = request.params as { id: string }
-  const data = await manager.discord(id)
+  const data = await dataManager.discord(id)
 
   if (!data) return reply.code(400).send('User Not Found')
 
-  let card
-  if (await isCached(data)) {
-    card = await getCache(data)
-  } else {
-    card = await discordCard(data)
-    await cache(data, card)
-  }
+  const card = await cacheManager.generateCachedCard(data, discordCard)
 
   reply
     .code(200)

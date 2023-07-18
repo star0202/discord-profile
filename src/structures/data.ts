@@ -12,7 +12,7 @@ export default class DataManager {
     this.bot = new Bot(logger)
     this.lanyard = new LanyardRequest(logger)
 
-    this.logger = logger.child({ name: 'DataManager' })
+    this.logger = logger.child({ name: 'Data' })
 
     this.bot.start()
   }
