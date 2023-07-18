@@ -1,6 +1,7 @@
 import { getDiscord, getSpotify } from './bot'
 import { cache, getCache, isCached } from './cache'
-import { discordCard, spotifyCard } from './cards'
+import { discordCard } from './cards/discord'
+import { spotifyCard } from './cards/spotify'
 import fastify from 'fastify'
 import { readFile } from 'fs/promises'
 import { join } from 'path'
