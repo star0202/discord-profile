@@ -30,6 +30,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "crypto-js": "^4.1.1",
     "discord.js": "14.11.1-dev.1688170357-75d91b5.0",
     "dotenv": "^16.3.1",

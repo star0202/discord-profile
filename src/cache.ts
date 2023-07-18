@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { logger } from '.'
 import sha256 from 'crypto-js/sha256'
 import { appendFile, readFile } from 'fs/promises'
 import { join } from 'path'
 
-export const isCached = async (data: object) => {
+export const isCached = async (data: any) => {
   const hash = sha256(JSON.stringify(data)).toString()
 
   return readFile(join(__dirname, `../cache/${hash}.svg`))
@@ -11,7 +12,7 @@ export const isCached = async (data: object) => {
     .catch(() => false)
 }
 
-export const cache = async (data: object, svg: string) => {
+export const cache = async (data: any, svg: string) => {
   const hash = sha256(JSON.stringify(data)).toString()
 
   logger.info(`Caching ${hash}`)
@@ -19,7 +20,7 @@ export const cache = async (data: object, svg: string) => {
   await appendFile(join(__dirname, `../cache/${hash}.svg`), svg)
 }
 
-export const getCache = async (data: object) => {
+export const getCache = async (data: any) => {
   const hash = sha256(JSON.stringify(data)).toString()
 
   logger.info(`Using cache ${hash}`)

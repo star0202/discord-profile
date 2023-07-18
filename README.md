@@ -19,5 +19,8 @@ Base URL: `https://discord-profile-starcea.paring.moe`
 ### Spotify Presence
 ![Example](https://discord-profile-starcea.paring.moe/spotify/798690702635827200?)
 
+### Redirect to song
+- `/spotify/:id?redirect=true`
+
 ## Special Thanks
 [@pikokr](https://github.com/pikokr) - Hosting

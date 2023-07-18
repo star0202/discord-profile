@@ -1,13 +1,12 @@
 import { generate } from '.'
 
 export const spotifyCard = async (spotifyData: Spotify | null) => {
-  const data = {
-    song: spotifyData?.title ?? 'Not Playing',
-    artist: spotifyData?.artist ?? 'star0202/discord-profile',
-    album: spotifyData?.album ?? 'Spotify',
-    album_art_url: spotifyData?.albumArt
-      ? 'https://i.scdn.co/image/' + spotifyData?.albumArt
-      : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Emoji_u1f634.svg/1200px-Emoji_u1f634.svg.png',
+  const data = spotifyData ?? {
+    title: 'Not Playing',
+    artist: 'star0202/discord-profile',
+    album: 'Spotify',
+    albumArtURL:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Emoji_u1f634.svg/1200px-Emoji_u1f634.svg.png',
   }
 
   const albumMargin = 10
@@ -23,7 +22,7 @@ export const spotifyCard = async (spotifyData: Spotify | null) => {
       }}
     >
       <img
-        src={data.album_art_url}
+        src={data.albumArtURL}
         style={{
           width: 100 - albumMargin * 2,
           height: 100 - albumMargin * 2,
@@ -43,7 +42,7 @@ export const spotifyCard = async (spotifyData: Spotify | null) => {
           src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png"
           style={{ height: 20, marginBottom: 5 }}
         />
-        <div>{data.song}</div>
+        <div>{data.title}</div>
         <div style={{ display: 'flex', color: '#3d3d3d' }}>
           {data.artist} - {data.album}
         </div>
