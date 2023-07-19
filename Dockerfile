@@ -1,22 +1,15 @@
-FROM node:19-alpine AS builder
+FROM node:19-alpine
 
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN corepack enable && pnpm i --frozen-lockfile
+RUN corepack enable && pnpm i
 
-COPY tsconfig.json ./
-COPY src src
+COPY . .
 
-RUN pnpm build
+RUN pnpm run build
 
-FROM node:19-alpine
-
-WORKDIR /app
-
-COPY --from=builder /app ./
-
-RUN corepack enable
+EXPOSE 3000
 
 CMD ["pnpm", "start"]
