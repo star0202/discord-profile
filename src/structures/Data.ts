@@ -14,7 +14,7 @@ export default class DataManager {
 
     this.logger = logger.child({ name: 'Data' })
 
-    this.bot.login().then()
+    this.bot.start().then()
   }
 
   async discord(id: string) {
