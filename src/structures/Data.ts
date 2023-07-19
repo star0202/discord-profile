@@ -1,5 +1,5 @@
-import Bot from './bot'
-import LanyardRequest from './lanyard'
+import Bot from './Bot'
+import LanyardRequest from './Lanyard'
 import type { FastifyBaseLogger } from 'fastify'
 
 export default class DataManager {
