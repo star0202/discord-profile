@@ -27,10 +27,7 @@ export default class DataManager {
     id: string,
     redirect: false
   ): Promise<Spotify | null | undefined>
-  async spotify(
-    id: string,
-    redirect: boolean
-  ): Promise<Spotify | string | null | undefined> {
+  async spotify(id: string, redirect: boolean) {
     this.logger.info(
       `Spotify - ${id} (${redirect ? 'Redirect' : 'Not Redirect'})`
     )
