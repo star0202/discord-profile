@@ -23,10 +23,12 @@ export default class Bot extends Client {
     this.once('ready', () => {
       this.logger.info('Discord Bot Ready')
     })
+
+    this.on('debug', (m) => this.logger.debug(m))
   }
 
-  start() {
-    this.login(env.BOT_TOKEN)
+  async start() {
+    await this.login(env.BOT_TOKEN)
   }
 
   getUser(id: string) {
