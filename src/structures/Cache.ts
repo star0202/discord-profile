@@ -1,8 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import sha256 from 'crypto-js/sha256'
 import type { FastifyBaseLogger } from 'fastify'
 import { appendFile, readFile } from 'fs/promises'
 import { join } from 'path'
+
+type Data = Discord | Spotify | null
 
 export default class CacheManager {
   private logger: FastifyBaseLogger
@@ -11,7 +12,7 @@ export default class CacheManager {
     this.logger = logger.child({ name: 'Cache' })
   }
 
-  async isCached(data: any) {
+  async isCached(data: Data) {
     const hash = sha256(JSON.stringify(data)).toString()
 
     return readFile(join(__dirname, `../../cache/${hash}.svg`))
@@ -19,7 +20,7 @@ export default class CacheManager {
       .catch(() => false)
   }
 
-  async cache(data: any, svg: string) {
+  async cache(data: Data, svg: string) {
     const hash = sha256(JSON.stringify(data)).toString()
 
     this.logger.info(`Caching ${hash}`)
@@ -27,7 +28,7 @@ export default class CacheManager {
     await appendFile(join(__dirname, `../../cache/${hash}.svg`), svg)
   }
 
-  async getCache(data: any) {
+  async getCache(data: Data) {
     const hash = sha256(JSON.stringify(data)).toString()
 
     this.logger.info(`Using cache ${hash}`)
@@ -35,9 +36,9 @@ export default class CacheManager {
     return await readFile(join(__dirname, `../../cache/${hash}.svg`), 'utf-8')
   }
 
-  async generateCachedCard(
-    data: any,
-    generate: (data: any) => Promise<string>
+  async generateCachedCard<T extends Data>(
+    data: T,
+    generate: (data: T) => Promise<string>
   ) {
     if (await this.isCached(data)) return await this.getCache(data)
 
