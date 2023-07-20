@@ -53,7 +53,7 @@ export const discordCard = async (discordData: Discord) => {
           style={{ height: 20, marginBottom: 5 }}
         />
         {data.name}
-        <div style={{ display: 'flex', opacity: 0.8 }}>
+        <div style={{ display: 'flex' }}>
           {data.username} -
           <div
             style={{
