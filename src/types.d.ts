@@ -9,7 +9,7 @@ type Discord = {
 type Spotify = {
   title: string
   artist: string
-  album: string
+  album?: string
   albumArtURL: string
 }
 

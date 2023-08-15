@@ -22,18 +22,26 @@ export default class DataManager {
     return Promise.race([this.bot.getDiscord(id), this.lanyard.getDiscord(id)])
   }
 
-  async spotify(id: string, redirect: true): Promise<string | null | undefined>
   async spotify(
     id: string,
-    redirect: false
+    redirect: true,
+    album: boolean
+  ): Promise<string | null | undefined>
+  async spotify(
+    id: string,
+    redirect: false,
+    album: boolean
   ): Promise<Spotify | null | undefined>
-  async spotify(id: string, redirect: boolean) {
+  async spotify(id: string, redirect: boolean, album: boolean) {
     this.logger.info(
       `Spotify - ${id} (${redirect ? 'Redirect' : 'Not Redirect'})`
     )
 
     if (redirect) return this.lanyard.getSpotifyTrackURL(id)
 
-    return Promise.race([this.bot.getSpotify(id), this.lanyard.getSpotify(id)])
+    return Promise.race([
+      this.bot.getSpotify(id, album),
+      this.lanyard.getSpotify(id, album),
+    ])
   }
 }

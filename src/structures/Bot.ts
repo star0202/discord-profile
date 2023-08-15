@@ -55,7 +55,10 @@ export default class Bot extends Client {
     }
   }
 
-  async getSpotify(id: string): Promise<Spotify | null | undefined> {
+  async getSpotify(
+    id: string,
+    album: boolean
+  ): Promise<Spotify | null | undefined> {
     const data = this.getUser(id)
 
     if (!data || !data.presence) return undefined
@@ -79,7 +82,7 @@ export default class Bot extends Client {
     return {
       title: spotify.details,
       artist: spotify.state,
-      album: spotify.assets.largeText,
+      album: album ? spotify.assets.largeText : undefined,
       albumArtURL: `https://i.scdn.co/image/${spotify.assets.largeImage.slice(
         8
       )}`,

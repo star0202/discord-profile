@@ -39,7 +39,10 @@ export default class LanyardRequest {
     }
   }
 
-  async getSpotify(id: string): Promise<Spotify | null | undefined> {
+  async getSpotify(
+    id: string,
+    album: boolean
+  ): Promise<Spotify | null | undefined> {
     const data = await this.getUser(id)
 
     if (!data) return undefined
@@ -49,7 +52,7 @@ export default class LanyardRequest {
     return {
       title: data.spotify.song,
       artist: data.spotify.artist,
-      album: data.spotify.album,
+      album: album ? data.spotify.album : undefined,
       albumArtURL: data.spotify.album_art_url,
     }
   }

@@ -38,17 +38,20 @@ app.get('/spotify/:id', async (request, reply) => {
   if (!request.params) return reply.code(400).send('No User ID Provided')
 
   const { id } = request.params as { id: string }
-  const { redirect } = request.query as { redirect: string }
+  const { redirect, album } = request.query as {
+    redirect?: string
+    album?: string
+  }
 
   let data
   if (redirect === 'true') {
-    data = await dataManager.spotify(id, true)
+    data = await dataManager.spotify(id, true, album === 'true')
 
     if (data === undefined) return reply.code(400).send('User Not Found')
 
     reply.redirect(data ?? 'https://github.com/star0202/discord-profile')
   } else {
-    data = await dataManager.spotify(id, false)
+    data = await dataManager.spotify(id, false, album === 'true')
 
     if (data === undefined) return reply.code(400).send('User Not Found')
 
