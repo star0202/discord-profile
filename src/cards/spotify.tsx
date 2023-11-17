@@ -29,7 +29,7 @@ export const spotifyCard = async (spotifyData: Spotify | null) => {
     />
   )
 
-  return await generate(
+  return generate(
     <div
       style={{
         display: 'flex',

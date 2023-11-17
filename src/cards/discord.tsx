@@ -21,7 +21,7 @@ export const discordCard = async (discordData: Discord) => {
   const pfpMargin = 10
   const textMargin = 15
 
-  return await generate(
+  return generate(
     <div
       style={{
         display: 'flex',

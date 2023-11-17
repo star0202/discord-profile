@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 import satori from 'satori'
 
 export const generate = async (element: ReactNode) => {
-  return await satori(element, {
+  return satori(element, {
     height: 100,
     fonts: [
       {

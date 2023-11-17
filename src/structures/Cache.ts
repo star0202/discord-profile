@@ -15,7 +15,7 @@ export default class CacheManager {
   async cache(svg: string, hash: string) {
     this.logger.info(`Caching ${hash}`)
 
-    await writeFile(join(__dirname, `../../cache/${hash}.svg`), svg)
+    writeFile(join(__dirname, `../../cache/${hash}.svg`), svg)
   }
 
   async generateCachedCard<T extends Data>(
@@ -27,14 +27,10 @@ export default class CacheManager {
     try {
       this.logger.info(`Using cache ${hash}`)
 
-      const svg = await readFile(
-        join(__dirname, `../../cache/${hash}.svg`),
-        'utf-8'
-      )
-      return svg
+      return readFile(join(__dirname, `../../cache/${hash}.svg`), 'utf-8')
     } catch (e) {
       const svg = await generate(data)
-      await this.cache(svg, hash)
+      this.cache(svg, hash)
 
       return svg
     }
