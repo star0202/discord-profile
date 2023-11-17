@@ -23,7 +23,7 @@ export const spotifyCard = async (spotifyData: Spotify | null) => {
   ) : (
     <div
       style={{
-        height: 100 - albumMargin * 2,
+        height: 100 - albumMargin,
         margin: albumMargin / 2,
       }}
     />
