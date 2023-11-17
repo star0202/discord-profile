@@ -41,7 +41,7 @@ export default class Bot extends Client {
   async getDiscord(id: string): Promise<Discord | undefined> {
     const data = this.getUser(id)
 
-    if (!data || !data.presence) return undefined
+    if (!data) return undefined
 
     return {
       name: data.user.globalName ?? data.user.username,
@@ -51,7 +51,7 @@ export default class Bot extends Client {
         extension: data.user.avatar?.startsWith('a_') ? 'gif' : 'png',
         size: 1024,
       }),
-      status: data.presence.status,
+      status: data.presence?.status ?? 'offline',
     }
   }
 
@@ -61,7 +61,9 @@ export default class Bot extends Client {
   ): Promise<Spotify | null | undefined> {
     const data = this.getUser(id)
 
-    if (!data || !data.presence) return undefined
+    if (!data) return undefined
+
+    if (!data.presence) return null
 
     const spotify = data.presence.activities.find(
       (activity) => activity.name === 'Spotify'
