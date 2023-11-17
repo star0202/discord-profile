@@ -27,7 +27,7 @@ export default class CacheManager {
     try {
       this.logger.info(`Using cache ${hash}`)
 
-      return readFile(join(__dirname, `../../cache/${hash}.svg`), 'utf-8')
+      return await readFile(join(__dirname, `../../cache/${hash}.svg`), 'utf-8')
     } catch (e) {
       const svg = await generate(data)
       this.cache(svg, hash)
