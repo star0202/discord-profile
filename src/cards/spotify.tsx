@@ -5,12 +5,29 @@ export const spotifyCard = async (spotifyData: Spotify | null) => {
     title: 'Not Playing',
     artist: 'star0202/discord-profile',
     album: 'Spotify',
-    albumArtURL:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Emoji_u1f634.svg/1200px-Emoji_u1f634.svg.png',
   }
 
   const albumMargin = 10
   const textMargin = 15
+
+  const imageElement = data.albumArtURL ? (
+    <img
+      src={data.albumArtURL}
+      style={{
+        width: 100 - albumMargin * 2,
+        height: 100 - albumMargin * 2,
+        margin: albumMargin,
+        borderRadius: 10,
+      }}
+    />
+  ) : (
+    <div
+      style={{
+        height: 100 - albumMargin * 2,
+        margin: albumMargin / 2,
+      }}
+    />
+  )
 
   return await generate(
     <div
@@ -21,15 +38,7 @@ export const spotifyCard = async (spotifyData: Spotify | null) => {
         borderRadius: 10,
       }}
     >
-      <img
-        src={data.albumArtURL}
-        style={{
-          width: 100 - albumMargin * 2,
-          height: 100 - albumMargin * 2,
-          margin: albumMargin,
-          borderRadius: 10,
-        }}
-      />
+      {imageElement}
       <div
         style={{
           display: 'flex',

@@ -10,7 +10,7 @@ type Spotify = {
   title: string
   artist: string
   album?: string
-  albumArtURL: string
+  albumArtURL?: string
 }
 
 type Status = 'online' | 'idle' | 'dnd' | 'offline'
