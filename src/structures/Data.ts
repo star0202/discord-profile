@@ -25,16 +25,16 @@ export default class DataManager {
   async spotify(
     id: string,
     redirect: true,
-    album: boolean
+    album: boolean,
   ): Promise<string | null | undefined>
   async spotify(
     id: string,
     redirect: false,
-    album: boolean
+    album: boolean,
   ): Promise<Spotify | null | undefined>
   async spotify(id: string, redirect: boolean, album: boolean) {
     this.logger.info(
-      `Spotify - ${id} (${redirect ? 'Redirect' : 'Not Redirect'})`
+      `Spotify - ${id} (${redirect ? 'Redirect' : 'Not Redirect'})`,
     )
 
     if (redirect) return this.lanyard.getSpotifyTrackURL(id)

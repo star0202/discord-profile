@@ -57,6 +57,6 @@ export const spotifyCard = async (spotifyData: Spotify | null) => {
           {data.album ? ` - ${data.album}` : ''}
         </div>
       </div>
-    </div>
+    </div>,
   )
 }

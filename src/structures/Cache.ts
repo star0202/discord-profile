@@ -20,7 +20,7 @@ export default class CacheManager {
 
   async generateCachedCard<T extends Data>(
     data: T,
-    generate: (data: T) => Promise<string>
+    generate: (data: T) => Promise<string>,
   ) {
     const hash = sha256(JSON.stringify(data)).toString()
 

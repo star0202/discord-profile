@@ -65,6 +65,6 @@ export const discordCard = async (discordData: Discord) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
   )
 }

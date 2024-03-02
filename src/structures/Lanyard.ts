@@ -41,7 +41,7 @@ export default class LanyardRequest {
 
   async getSpotify(
     id: string,
-    album: boolean
+    album: boolean,
   ): Promise<Spotify | null | undefined> {
     const data = await this.getUser(id)
 

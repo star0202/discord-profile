@@ -57,7 +57,7 @@ export default class Bot extends Client {
 
   async getSpotify(
     id: string,
-    album: boolean
+    album: boolean,
   ): Promise<Spotify | null | undefined> {
     const data = this.getUser(id)
 
@@ -66,7 +66,7 @@ export default class Bot extends Client {
     if (!data.presence) return null
 
     const spotify = data.presence.activities.find(
-      (activity) => activity.name === 'Spotify'
+      (activity) => activity.name === 'Spotify',
     )
 
     if (
@@ -86,7 +86,7 @@ export default class Bot extends Client {
       artist: spotify.state,
       album: album ? spotify.assets.largeText : undefined,
       albumArtURL: `https://i.scdn.co/image/${spotify.assets.largeImage.slice(
-        8
+        8,
       )}`,
     }
   }

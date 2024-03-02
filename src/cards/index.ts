@@ -10,13 +10,13 @@ export const generate = async (element: ReactNode) => {
       {
         name: 'Pretendard-SemiBold',
         data: await readFile(
-          join(__dirname, '../../fonts/Pretendard-SemiBold.otf')
+          join(__dirname, '../../fonts/Pretendard-SemiBold.otf'),
         ),
       },
       {
         name: 'PretendardJP-SemiBold',
         data: await readFile(
-          join(__dirname, '../../fonts/PretendardJP-SemiBold.otf')
+          join(__dirname, '../../fonts/PretendardJP-SemiBold.otf'),
         ),
       },
     ],
